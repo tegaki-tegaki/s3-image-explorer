@@ -91,19 +91,19 @@ export default function Home() {
                   a permissive CORS setup{" "}
                 </Link>
               </Typography>
-              <li>
-                <Typography variant="body1">
-                  your bucket policy must allow <code>getObject</code>, for that
-                  you can use the{" "}
-                  <Link
-                    href="http://awspolicygen.s3.amazonaws.com/policygen.html"
-                    component={NextLink}
-                  >
-                    Policy Builder
-                  </Link>
-                  .
-                </Typography>
-              </li>
+            </li>
+            <li>
+              <Typography variant="body1">
+                your bucket policy must allow <code>getObject</code>, for that
+                you can use the{" "}
+                <Link
+                  href="http://awspolicygen.s3.amazonaws.com/policygen.html"
+                  component={NextLink}
+                >
+                  Policy Builder
+                </Link>
+                .
+              </Typography>
             </li>
           </ul>
           <Typography variant="body2" className="mb-8">

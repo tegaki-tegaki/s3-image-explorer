@@ -1,4 +1,3 @@
-import { BUCKET_URL } from "@/app/page";
 import { Grid2, Paper, TablePagination } from "@mui/material";
 import { useState } from "react";
 
