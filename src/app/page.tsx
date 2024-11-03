@@ -107,7 +107,7 @@ export default function Home() {
                 </Typography>
               </li>
             </ul>
-            <Typography variant="body2" className="mb-8">
+            <Typography variant="body2" sx={{ marginBottom: 4 }}>
               The webapp also assumes that thumbnails for every image are inside
               a folder called <code>thumbnails/</code> directly inside the
               prefixed folder (the one you enter below), it also assumes that
