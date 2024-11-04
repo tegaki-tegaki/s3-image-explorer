@@ -26,6 +26,7 @@ export const ThumbnailGallery = ({
     newPage: number,
   ) => {
     setPage(newPage);
+    window.scrollTo(0, 0);
   };
 
   const handleChangeRowsPerPage = (
@@ -33,7 +34,10 @@ export const ThumbnailGallery = ({
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    window.scrollTo(0, 0);
   };
+
+  console.log({ page });
 
   return (
     <div>
@@ -68,17 +72,18 @@ export const ThumbnailGallery = ({
             onChange={(event) => {
               console.log({ event });
               setPage(parseInt(event.target.value.toString() ?? "1"));
+              window.scrollTo(0, 0);
             }}
           >
-            {[...Array(Math.floor(images.length / rowsPerPage)).keys()]
-              .map((i) => (i += 1))
-              .map((i) => {
+            {[...Array(Math.ceil(images.length / rowsPerPage)).keys()].map(
+              (i) => {
                 return (
                   <MenuItem key={i} value={i}>
-                    {i}
+                    {i + 1}
                   </MenuItem>
                 );
-              })}
+              },
+            )}
           </Select>
         </FormControl>
       </Stack>
@@ -95,10 +100,11 @@ export const ThumbnailGallery = ({
       />
       <Stack sx={{ alignItems: "flex-end", marginX: 2, marginBottom: 4 }}>
         <Pagination
-          count={Math.floor(images.length / rowsPerPage)}
-          page={page}
+          count={Math.ceil(images.length / rowsPerPage)}
+          page={page + 1}
           onChange={(event, value) => {
-            setPage(value);
+            setPage(value - 1);
+            window.scrollTo(0, 0);
           }}
           variant="outlined"
           shape="rounded"
