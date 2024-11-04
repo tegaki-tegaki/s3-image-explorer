@@ -9,6 +9,7 @@ import {
   Stack,
   TablePagination,
 } from "@mui/material";
+import { parseAsInteger, useQueryState } from "nuqs";
 import { useState } from "react";
 
 export const ThumbnailGallery = ({
@@ -18,8 +19,16 @@ export const ThumbnailGallery = ({
   images: Array<string>;
   bucketURL: string;
 }) => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  // const [page, setPage] = useState(0);
+  const [page, setPage] = useQueryState<number>(
+    "page",
+    parseAsInteger.withDefault(0).withOptions({ history: "push" }),
+  );
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useQueryState<number>(
+    "rowsPerPag",
+    parseAsInteger.withDefault(10),
+  );
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
