@@ -1,4 +1,12 @@
-import { Grid2, Paper, TablePagination } from "@mui/material";
+import {
+  Grid2,
+  MenuItem,
+  Pagination,
+  Paper,
+  Select,
+  Stack,
+  TablePagination,
+} from "@mui/material";
 import { useState } from "react";
 
 export const ThumbnailGallery = ({
@@ -48,7 +56,30 @@ export const ThumbnailGallery = ({
             );
           })}
       </Grid2>
+      <Stack sx={{ alignItems: "flex-end", marginX: 2, marginTop: 2 }}>
+        <Select
+          id="go-to-page"
+          label="Go to page"
+          variant="standard"
+          value={page.toString()}
+          onChange={(event) => {
+            console.log({ event });
+            setPage(parseInt(event.target.value.toString() ?? "1"));
+          }}
+        >
+          {[...Array(Math.floor(images.length / rowsPerPage)).keys()]
+            .map((i) => (i += 1))
+            .map((i) => {
+              return (
+                <MenuItem key={i} value={i}>
+                  {i}
+                </MenuItem>
+              );
+            })}
+        </Select>
+      </Stack>
       <TablePagination
+        sx={{ marginX: 2 }}
         component="div"
         count={images.length}
         page={page}
@@ -56,7 +87,21 @@ export const ThumbnailGallery = ({
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         labelRowsPerPage="per page"
+        size="medium"
       />
+      <Stack sx={{ alignItems: "flex-end", marginX: 2, marginBottom: 4 }}>
+        <Pagination
+          count={Math.floor(images.length / rowsPerPage)}
+          page={page}
+          onChange={(event, value) => {
+            setPage(value);
+          }}
+          variant="outlined"
+          shape="rounded"
+          size="large"
+          color="primary"
+        />
+      </Stack>
     </div>
   );
 };
