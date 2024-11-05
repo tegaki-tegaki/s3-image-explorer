@@ -68,42 +68,66 @@ export const ThumbnailGallery = ({
             );
           })}
       </Grid2>
-      <Stack sx={{ alignItems: "flex-end", marginX: 2, marginTop: 2 }}>
-        <FormControl size="small" sx={{ minWidth: 120 }}>
-          <InputLabel id="go-to-page-label">Go to page</InputLabel>
-          <Select
-            id="go-to-page"
-            label="Go to page"
-            value={page.toString()}
-            onChange={(event) => {
-              console.log({ event });
-              setPage(parseInt(event.target.value.toString() ?? "1"));
-              window.scrollTo(0, 0);
-            }}
-          >
-            {[...Array(Math.ceil(images.length / rowsPerPage)).keys()].map(
-              (i) => {
-                return (
-                  <MenuItem key={i} value={i}>
-                    {i + 1}
-                  </MenuItem>
-                );
-              },
-            )}
-          </Select>
-        </FormControl>
+      <Stack
+        sx={{ marginY: 2, marginX: "18px" }}
+        justifyContent="flex-end"
+        direction="row"
+        flexWrap="nowrap"
+        alignItems="flex-end"
+      >
+        <Stack
+          sx={{
+            alignItems: "flex-end",
+            marginTop: 2,
+            display: "inline-block",
+          }}
+        >
+          <FormControl size="small" sx={{ minWidth: 90 }}>
+            <InputLabel id="go-to-page-label">Go to page</InputLabel>
+            <Select
+              id="go-to-page"
+              label="Go to page"
+              value={page.toString()}
+              onChange={(event) => {
+                console.log({ event });
+                setPage(parseInt(event.target.value.toString() ?? "1"));
+                window.scrollTo(0, 0);
+              }}
+            >
+              {[...Array(Math.ceil(images.length / rowsPerPage)).keys()].map(
+                (i) => {
+                  return (
+                    <MenuItem key={i} value={i}>
+                      {i + 1}
+                    </MenuItem>
+                  );
+                },
+              )}
+            </Select>
+          </FormControl>
+        </Stack>
+        <div>
+          <style>
+            {`
+.customTablePagination .MuiTablePagination-actions {
+display: none; 
+}
+`}
+          </style>
+          <TablePagination
+            sx={{ display: "inline-block", marginBottom: "-11px" }}
+            className="customTablePagination"
+            component="div"
+            count={images.length}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage="per page"
+            size="medium"
+          />
+        </div>
       </Stack>
-      <TablePagination
-        sx={{ marginX: 2 }}
-        component="div"
-        count={images.length}
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        labelRowsPerPage="per page"
-        size="medium"
-      />
       <Stack sx={{ alignItems: "flex-end", marginX: 2, marginBottom: 4 }}>
         <Pagination
           count={Math.ceil(images.length / rowsPerPage)}
@@ -115,6 +139,7 @@ export const ThumbnailGallery = ({
           variant="outlined"
           shape="rounded"
           size="large"
+          siblingCount={0}
           color="primary"
         />
       </Stack>
