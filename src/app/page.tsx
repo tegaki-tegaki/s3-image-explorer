@@ -1,7 +1,7 @@
 "use client";
 
 import { ThumbnailGallery } from "@/components/ThumbnailGallery";
-import { ExpandMore } from "@mui/icons-material";
+import { ExpandMore, Link as LinkIcon } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -113,6 +113,14 @@ export default function Home() {
               prefixed folder (the one you enter below), it also assumes that
               these thumbnails are all using the extension <code>.jpg</code>.
             </Typography>
+            <Link
+              sx={{ marginBottom: 4, display: "block" }}
+              href="https://github.com/tegaki-tegaki/s3-image-explorer"
+              component={NextLink}
+            >
+              <LinkIcon sx={{ marginInline: 0.5 }} />
+              Source code for this web app
+            </Link>
             <form
               action={(form_data: FormData) => {
                 console.log({ form_data });
